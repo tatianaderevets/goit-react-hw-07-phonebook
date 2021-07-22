@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import shortid from "shortid";
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
-import contactsOperations from "../../redux/contacts/contacts-operation";
+import { contactsOperation, contactsSelectors } from '../../redux/contacts'
+
 
 
 
@@ -85,12 +86,12 @@ class Form extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  contacts: state.contacts.items,
+  contacts: contactsSelectors.getAllContacts(state),
 });
 
 const mapDispatchToProps = dispatch => ({
     onSubmit: (name, number) =>{
-        return dispatch(contactsOperations.addContact(name, number))
+        return dispatch(contactsOperation.addContact(name, number))
     },
 })
 
